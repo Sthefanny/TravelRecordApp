@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Microsoft.WindowsAzure.MobileServices;
 using System.IO;
 
 namespace TravelRecordApp.Droid
@@ -18,6 +19,7 @@ namespace TravelRecordApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Xamarin.FormsMaps.Init(this, bundle);
+            CurrentPlatform.Init();
 
             LoadApplication(new App(GetDbPath()));
         }
