@@ -13,7 +13,7 @@
             <Entry x:Name="experienceEntry"
                    Placeholder="Write your experience"/>
             <ListView x:Name="venueListView"
-                      Margin="20 0"
+                      Margin="20, 0"
                       HorizontalOptions="FillAndExpand">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -35,7 +35,7 @@
                                        Text="{Binding Location.Address}"/>
                                 <Label Grid.Column="1"
                                        Text="{Binding Location.Distance,
-                                          StringFormat='Meters {0}'}" />
+                                          StringFormat='{0} meters'}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
