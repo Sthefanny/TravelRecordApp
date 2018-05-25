@@ -20,7 +20,7 @@
                Text="Test"
                IsPassword="True" />
         <Button x:Name="registerButton"
-                Text="Log in"
+                Text="Register"
                 Margin="0, 50, 0, 0"
                 Clicked="RegisterButton_Clicked"
                 Style="{StaticResource NormalButton}"/>

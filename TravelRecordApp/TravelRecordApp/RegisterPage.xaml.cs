@@ -1,5 +1,5 @@
 ﻿using System;
-
+using TravelRecordApp.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,15 +13,21 @@ namespace TravelRecordApp
             InitializeComponent();
         }
 
-        private void RegisterButton_Clicked(object sender, EventArgs e)
+        private async void RegisterButton_Clicked(object sender, EventArgs e)
         {
             if (passwordEntry.Text == confirmPasswordEntry.Text)
             {
+                var user = new User
+                {
+                    Email = emailEntry.Text,
+                    Password = passwordEntry.Text
+                };
 
+                await App.MobileService.GetTable<User>().InsertAsync(user);
             }
             else
             {
-                DisplayAlert("Error", "Passwords don't match", "Ok");
+                await DisplayAlert("Error", "Passwords don't match", "Ok");
             }
         }
     }
