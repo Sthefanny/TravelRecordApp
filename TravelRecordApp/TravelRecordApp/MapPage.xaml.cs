@@ -1,10 +1,8 @@
 ﻿
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
-using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TravelRecordApp.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -32,13 +30,18 @@ namespace TravelRecordApp
             var position = await locator.GetPositionAsync();
             SetMapPosition(position);
 
-            using (var conn = new SQLiteConnection(App.DatabaseLocation))
-            {
-                conn.CreateTable<Post>();
-                var posts = conn.Table<Post>().ToList();
+            //    using (var conn = new SQLiteConnection(App.DatabaseLocation))
+            //    {
+            //        conn.CreateTable<Post>();
+            //        var posts = conn.Table<Post>().ToList();
 
-                DisplayInMap(posts);
-            }
+            //        DisplayInMap(posts);
+            //    }
+            //}
+
+
+            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.User.Id).ToListAsync();
+            DisplayInMap(posts);
         }
 
         protected override async void OnDisappearing()

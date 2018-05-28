@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.IO;
 using UIKit;
@@ -22,6 +23,7 @@ namespace TravelRecordApp.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
+            CurrentPlatform.Init();
 
             LoadApplication(new TravelRecordApp.App(GetDbPath()));
 
