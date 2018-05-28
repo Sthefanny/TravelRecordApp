@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using TravelRecordApp.Helpers;
 
 namespace TravelRecordApp.Model
@@ -35,6 +38,25 @@ namespace TravelRecordApp.Model
         public string Name { get; set; }
         public Location Location { get; set; }
         public IList<Category> Categories { get; set; }
+
+        public static async Task<List<Venue>> GetVenues(double latitute, double longitude)
+        {
+            var venues = new List<Venue>();
+
+            var url = VenueRoot.GenerateUrl(latitute, longitude);
+
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+
+                var venueRoot = JsonConvert.DeserializeObject<VenueRoot>(json);
+
+                venues = venueRoot.Response.Venues as List<Venue>;
+            }
+
+            return venues;
+        }
     }
 
     public class Response
