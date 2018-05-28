@@ -30,33 +30,9 @@ namespace TravelRecordApp
         {
             try
             {
-                var selectedVenue = venueListView.SelectedItem as Venue;
-                var firstCategory = selectedVenue?.Categories.FirstOrDefault();
-                var post = new Post
-                {
-                    Experience = experienceEntry.Text,
-                    CategoryId = firstCategory?.Id,
-                    CategoryName = firstCategory?.Name,
-                    Address = selectedVenue.Location.Address,
-                    Distance = selectedVenue.Location.Distance,
-                    Latitude = selectedVenue.Location.Lat,
-                    Longitude = selectedVenue.Location.Lng,
-                    VenueName = selectedVenue.Name,
-                    UserId = App.User.Id
-                };
-
-                //using (var conn = new SQLiteConnection(App.DatabaseLocation))
-                //{
-                //    conn.CreateTable<Post>();
-                //    var rows = conn.Insert(post);
-
-                //    if (rows > 0)
-                //        DisplayAlert("Success", "Experience succesfully inserted", "Ok");
-                //    else
-                //        DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
-                //}
-
+                var post = GetPost();
                 Post.Insert(post);
+
                 await DisplayAlert("Success", "Experience succesfully inserted", "Ok");
             }
             catch (NullReferenceException nre)
@@ -67,6 +43,25 @@ namespace TravelRecordApp
             {
                 await DisplayAlert("Failure", "Experience failed to be inserted", "Ok");
             }
+        }
+
+        private Post GetPost()
+        {
+            var selectedVenue = venueListView.SelectedItem as Venue;
+            var firstCategory = selectedVenue?.Categories.FirstOrDefault();
+            var post = new Post
+            {
+                Experience = experienceEntry.Text,
+                CategoryId = firstCategory?.Id,
+                CategoryName = firstCategory?.Name,
+                Address = selectedVenue.Location.Address,
+                Distance = selectedVenue.Location.Distance,
+                Latitude = selectedVenue.Location.Lat,
+                Longitude = selectedVenue.Location.Lng,
+                VenueName = selectedVenue.Name,
+                UserId = App.User.Id
+            };
+            return post;
         }
     }
 }

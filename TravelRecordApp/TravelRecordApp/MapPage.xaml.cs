@@ -30,17 +30,7 @@ namespace TravelRecordApp
             var position = await locator.GetPositionAsync();
             SetMapPosition(position);
 
-            //    using (var conn = new SQLiteConnection(App.DatabaseLocation))
-            //    {
-            //        conn.CreateTable<Post>();
-            //        var posts = conn.Table<Post>().ToList();
-
-            //        DisplayInMap(posts);
-            //    }
-            //}
-
-
-            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.User.Id).ToListAsync();
+            var posts = await Post.Read();
             DisplayInMap(posts);
         }
 

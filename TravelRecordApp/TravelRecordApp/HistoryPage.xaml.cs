@@ -16,15 +16,7 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
-            //using (var conn = new SQLiteConnection(App.DatabaseLocation))
-            //{
-            //    conn.CreateTable<Post>();
-            //    var posts = conn.Table<Post>().ToList();
-            //    PostListView.ItemsSource = posts;
-            //}
-
-            //TODO: Pass to a separate class
-            var posts = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.User.Id).ToListAsync();
+            var posts = await Post.Read();
             PostListView.ItemsSource = posts;
         }
     }

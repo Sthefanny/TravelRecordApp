@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TravelRecordApp.Model;
+﻿using TravelRecordApp.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,26 +16,13 @@ namespace TravelRecordApp
         {
             base.OnAppearing();
 
-            //using (var conn = new SQLiteConnection(App.DatabaseLocation))
-            //{
-            var postTable = await App.MobileService.GetTable<Post>().Where(p => p.UserId == App.User.Id).ToListAsync();
+            var posts = await Post.Read();
 
-            var categories = postTable.OrderBy(p => p.CategoryId).Select(p => p.CategoryName).Distinct().ToList();
-
-            var categoriesCount = new Dictionary<string, int>();
-
-            foreach (var category in categories)
-            {
-                var count = postTable.Where(p => p.CategoryName == category).ToList().Count;
-
-                if (!string.IsNullOrWhiteSpace(category))
-                    categoriesCount.Add(category, count);
-            }
+            var categoriesCount = Post.PostCategories(posts);
 
             categoriesListView.ItemsSource = categoriesCount;
 
-            postCountLabel.Text = postTable.Count.ToString();
-            //}
+            postCountLabel.Text = posts.Count.ToString();
         }
     }
 }
