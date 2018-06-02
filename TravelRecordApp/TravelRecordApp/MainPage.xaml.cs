@@ -1,26 +1,23 @@
 ﻿using System;
-using TravelRecordApp.Model;
+using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
 {
     public partial class MainPage : ContentPage
     {
+        private readonly MainViewModel _viewModel;
+
         public MainPage()
         {
             InitializeComponent();
 
             var assembly = typeof(MainPage);
 
-            iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.plane.png", assembly);
-        }
+            _viewModel = new MainViewModel();
+            BindingContext = _viewModel;
 
-        private async void LoginButton_Clicked(object sender, EventArgs e)
-        {
-            if (await User.TryLogin(emailEntry.Text, passwordEntry.Text))
-                await Navigation.PushAsync(new HomePage());
-            else
-                await DisplayAlert("Error", "There was an error logging you in", "Ok");
+            iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.plane.png", assembly);
         }
 
         private void registerUserButton_Clicked(object sender, EventArgs e)
