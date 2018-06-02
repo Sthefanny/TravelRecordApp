@@ -13,12 +13,10 @@
         <Entry x:Name="emailEntry"
     	       Placeholder="Email address"
                TextColor="{StaticResource BlueColor}"
-               Text="Test"
     	       Keyboard="Email" />
         <Entry x:Name="passwordEntry"
                Placeholder="Password"
                TextColor="{StaticResource BlueColor}"
-               Text="Test"
                IsPassword="True" />
         <Button x:Name="loginButton"
                 Text="Log in"

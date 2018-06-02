@@ -10,9 +10,12 @@ namespace TravelRecordApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewTravelPage : ContentPage
     {
+        private readonly Post _post;
         public NewTravelPage()
         {
             InitializeComponent();
+            _post = new Post();
+            containerStackLayout.BindingContext = _post;
         }
 
         protected override async void OnAppearing()
@@ -49,19 +52,17 @@ namespace TravelRecordApp
         {
             var selectedVenue = venueListView.SelectedItem as Venue;
             var firstCategory = selectedVenue?.Categories.FirstOrDefault();
-            var post = new Post
-            {
-                Experience = experienceEntry.Text,
-                CategoryId = firstCategory?.Id,
-                CategoryName = firstCategory?.Name,
-                Address = selectedVenue.Location.Address,
-                Distance = selectedVenue.Location.Distance,
-                Latitude = selectedVenue.Location.Lat,
-                Longitude = selectedVenue.Location.Lng,
-                VenueName = selectedVenue.Name,
-                UserId = App.User.Id
-            };
-            return post;
+
+            _post.CategoryId = firstCategory?.Id;
+            _post.CategoryName = firstCategory?.Name;
+            _post.Address = selectedVenue.Location.Address;
+            _post.Distance = selectedVenue.Location.Distance;
+            _post.Latitude = selectedVenue.Location.Lat;
+            _post.Longitude = selectedVenue.Location.Lng;
+            _post.VenueName = selectedVenue.Name;
+            _post.UserId = App.User.Id;
+
+            return _post;
         }
     }
 }
