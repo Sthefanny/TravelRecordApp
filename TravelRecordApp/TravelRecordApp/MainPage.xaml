@@ -27,9 +27,9 @@
                 CommandParameter="{Binding User}"
                 Style="{StaticResource NormalButton}"/>
         <Button x:Name="registerUserButton"
-                Text="Register"
+                Text="Register"                        
                 HorizontalOptions="End"
-                Clicked="registerUserButton_Clicked"/>
+                Command="{Binding RegisterNavigationCommand}"/>
     </StackLayout>
 
 </ContentPage>

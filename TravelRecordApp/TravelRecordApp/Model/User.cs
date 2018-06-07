@@ -41,6 +41,17 @@ namespace TravelRecordApp.Model
                 OnPropertyChanged();
             }
         }
+        private string _confirmPassword;
+
+        public string ConfirmPassword
+        {
+            get => _confirmPassword;
+            set
+            {
+                _confirmPassword = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public static async Task<bool> TryLogin(string email, string password)
@@ -80,7 +91,8 @@ namespace TravelRecordApp.Model
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

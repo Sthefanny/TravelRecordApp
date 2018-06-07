@@ -1,5 +1,4 @@
-﻿using System;
-using TravelRecordApp.ViewModel;
+﻿using TravelRecordApp.ViewModel;
 using Xamarin.Forms;
 
 namespace TravelRecordApp
@@ -18,11 +17,6 @@ namespace TravelRecordApp
             BindingContext = _viewModel;
 
             iconImage.Source = ImageSource.FromResource("TravelRecordApp.Assets.Images.plane.png", assembly);
-        }
-
-        private void registerUserButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RegisterPage());
         }
     }
 }
